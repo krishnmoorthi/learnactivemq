@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/javascripts/stomp.js"></script>
+  <script src="/javascripts/stomp.min.js"></script>
+  <script src="/javascripts/activeMQClient.js"></script>
+</head>
+
+<body>
+  <div class="jumbotron text-center">
+    <h1 class="header-desc">
+      <%= title %>
+    </h1>
+    <p>Wine World auction using <a
+        href="https://blogs.mulesoft.com/api-integration/patterns/introducing-pubsub-pattern-for-anypoint-templates/">ActiveMQ</a>
+      STOMP protocol !</p><br>
+    <span id="user" class="user">Logged in as:&nbsp;<span id="loggedUser" class="loggedUser"></span></span>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <% products.forEach(function(product){ %>
+          <div class="col col-sm-2 product-listing">
+            <%= product.name %>
+              <%= product.ID %><br>
+                <img src="/images/<%= product.image%>"><br>
+                <span class="price-tag">price value:&nbsp;</span><span class="price-value-<%= product.ID %>">&#x20B9;<%=
+                    product.price %>
+                </span><br><br>Qty:&nbsp;</span>
+                <span class="bid-val-tag">
+                  <%= product.qty %>
+                </span><br><br>
+                <input type="text" id="bidPrice" name="<%= product.ID %>_bidPrice" maxlength="4" size="4">&nbsp;
+                <button type="button" class="btn btn-primary js_bid" data-style="<%= product.ID %>"
+                  data-productName="<%= product.name %>">BID</button>
+          </div>
+          <% }); %>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" id="homeModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-lg">
+        <div class="modal-header">
+          <h3 class="modal-title"> Welcome to WineWorld !</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <input type="email" id="email" class="form-control" placeholder="Enter your email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"> <span class="err-msg hide " id="validation_msg">Please
+            enter valid email !</span><br><br>
+          <button type="email" class="btn btn-primary" id="signup">Sign me up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid footer">
+    © 2023 Copyright:
+    <a class="text-dark" href="http://WKWIN0280068.global.publicisgroupe.net:3000">ActiveMQWinesWorld.com</a>
+  </div>
+</body>
+
+</html>
